@@ -67,6 +67,17 @@ The OpenAPI definition is in `mock-server/openapi.yaml`. Key business rules incl
 
 GitHub Actions runs the Playwright suite on pushes to `main`/`master` and pull requests targeting those branches. The workflow installs the dependencies and browser engines, runs tests in Chromium, Firefox, and WebKit, and uploads the HTML report as an artifact. The iOS workflow separately builds the app for Simulator; XCUITest is currently run locally using the command above.
 
+## AI-assisted test engineering
+
+GitHub Copilot was used as an engineering aid to accelerate project setup and test development:
+
+- Inspected the iOS and web sources to identify application flows, accessibility identifiers, API behavior, and mock-server scenario hooks before defining UI coverage.
+- Helped connect the existing app and mock server to a repeatable test workflow, including Playwright configuration, local server startup, deterministic backend reset, and GitHub Actions execution.
+- Scaffolded and iteratively refined TypeScript Playwright page objects and scenario-based specs for dashboard, device, and deployment journeys; the iOS UI test target uses a Swift dashboard page object.
+- Converted acceptance scenarios into measurable assertions for pagination, search, status filters, empty/error/slow states, deployment validation, and recovery.
+
+AI-generated changes were reviewed against the application sources and validated by running the browser tests across Chromium, Firefox, and WebKit. Copilot assisted with implementation; it did not replace test execution or engineering review.
+
 ## Project files
 
 - `MockDCOTAUITests/` — XCUITest cases and iOS dashboard page object
