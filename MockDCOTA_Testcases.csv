@@ -1,0 +1,363 @@
+ID,Section,Title,Priority,Preconditions,Steps,Expected Result,Platform,Suggested Level,Automate
+DASH-01,Dashboard,[DASH-01] Fleet total is shown for the whole fleet,P0,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the app. Web: go to http://localhost:8080 in your browser. iOS: launch MockDCOTA in the simulator.
+3. Make sure the Dashboard tab is selected (it is the first tab; on iOS its title is 'Fleet').
+4. Wait until the loading spinner disappears and the tiles appear.
+5. Find the tile labelled 'Total devices' and read the number.","Total devices tile reads 1,400,000.",Web + iOS,API,Yes
+DASH-02,Dashboard,[DASH-02] Status counts reconcile to total,P0,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the app. Web: go to http://localhost:8080 in your browser. iOS: launch MockDCOTA in the simulator.
+3. On the Dashboard, wait for the tiles to load.
+4. Write down the numbers on the Online, Offline, Updating and Failed tiles.
+5. Add the four numbers together.
+6. Compare the sum with the 'Total devices' tile.","Online + Offline + Updating + Failed = 1,400,000 exactly (no rounding drift).",Web + iOS,API,Yes
+DASH-03,Dashboard,[DASH-03] Online percentage is consistent with tiles,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the app. Web: go to http://localhost:8080 in your browser. iOS: launch MockDCOTA in the simulator.
+3. On the Dashboard, wait for the tiles to load.
+4. Note the Online tile and the Total devices tile.
+5. Calculate Online ÷ Total × 100 and round to one decimal place.
+6. Read the sentence under the tiles ('…% of the fleet is online') and compare.","Percentage equals Online ÷ Total, shown to 1 decimal place.",Web + iOS,Component,Yes
+DASH-04,Dashboard,[DASH-04] Active deployments count matches Deployments tab,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the app. Web: go to http://localhost:8080 in your browser. iOS: launch MockDCOTA in the simulator.
+3. On the Dashboard, note the number on the 'Active deployments' tile.
+4. Open the Deployments tab.
+5. Count the rows whose status badge says Scheduled or In Progress.
+6. Compare that count with the tile value.",Tile equals the number of active rows (1 on fresh data: dep-001).,Web + iOS,UI,Later
+DASH-05,Dashboard,[DASH-05] Active count updates after a new deployment,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the app. Web: go to http://localhost:8080 in your browser. iOS: launch MockDCOTA in the simulator.
+3. On the Dashboard, note the 'Active deployments' value.
+4. Open Content, tap Deploy on 'Store Safety Notice', select 'Leeds Central' and press Deploy (case CON-08).
+5. When the Deployments tab appears, switch back to the Dashboard.
+6. Read 'Active deployments' again.",Active deployments increases by 1 (then drops back as it completes).,Web + iOS,UI,Later
+DASH-06,Dashboard,[DASH-06] Active count drops after cancel,P2,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the app. Web: go to http://localhost:8080 in your browser. iOS: launch MockDCOTA in the simulator.
+3. On the Dashboard, note the 'Active deployments' value (it should be 1).
+4. Open the Deployments tab.
+5. On the first deployment ('Holiday Demo Loop', In Progress), press 'Cancel deployment'.
+6. Go back to the Dashboard and read 'Active deployments'.",Active deployments decreases by 1.,Web + iOS,UI,Later
+DASH-07,Dashboard,[DASH-07] Server error shows banner and Retry recovers,P0,"All API calls fail (503). Web: POST /__admin/scenario {""mode"":""error""}. iOS: -dcota-scenario error.","1. Set the backend to the error scenario (S-ERR) before opening the app.
+2. Open the app. Web: go to http://localhost:8080 in your browser. iOS: launch MockDCOTA in the simulator.
+3. Wait for the Dashboard to finish loading.
+4. Look at the screen for a red banner and a Retry button.
+5. Set the backend back to standard. Web: run curl -X POST -H 'Content-Type: application/json' -d '{""mode"":""standard""}' http://localhost:8080/__admin/scenario. iOS: stop the app and relaunch it without the error launch argument.
+6. Press Retry (iOS: pull down on the screen to refresh instead) and check the tiles load and the banner disappears.","Red error banner with the service-unavailable message and a Retry button. After the backend recovers, Retry loads the tiles and the banner goes away.",Web + iOS,UI,Yes
+DASH-08,Dashboard,[DASH-08] Slow backend shows loading state,P1,"Every call takes about 2 s. Web: POST /__admin/scenario {""mode"":""slow""}. iOS: -dcota-scenario slow.","1. Set the backend to the slow scenario (S-SLOW).
+2. Open the app. Web: go to http://localhost:8080 in your browser. iOS: launch MockDCOTA in the simulator.
+3. Watch the Dashboard immediately after it opens.
+4. Check that a loading indicator is shown straight away.
+5. Wait about two seconds and check that the tiles replace the indicator.",Loading indicator appears immediately; tiles replace it after about 2 seconds; no blank flash or stale values.,Web + iOS,UI,Yes
+DASH-09,Dashboard,[DASH-09] Empty fleet renders zeros safely,P1,"Empty data. Web: POST /__admin/scenario {""mode"":""empty""}. iOS: launch with -dcota-scenario empty.","1. Set the backend to the empty scenario (S-EMPTY).
+2. Open the app. Web: go to http://localhost:8080 in your browser. iOS: launch MockDCOTA in the simulator.
+3. Wait for the Dashboard to load.
+4. Read every tile and the percentage line under them.","All tiles show 0 and the percentage shows 0.0% (no NaN, no divide-by-zero).",Web + iOS,Component,Yes
+DASH-10,Dashboard,[DASH-10] Refresh reloads data,P2,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the app. Web: go to http://localhost:8080 in your browser. iOS: launch MockDCOTA in the simulator.
+3. On the Dashboard, wait for the tiles to load.
+4. iOS: place your finger at the top of the screen and pull down until the spinner shows, then release. Web: click the Devices tab, then click the Dashboard tab again.
+5. Check that the tiles show again once, with no duplicates and no spinner left on screen.",Data reloads without duplicating tiles or leaving the spinner on.,Web + iOS,Manual,Manual
+DEV-01,Devices,[DEV-01] First page shows 25 devices and the total,P0,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the app. Web: go to http://localhost:8080 in your browser. iOS: launch MockDCOTA in the simulator.
+3. Open the Devices tab.
+4. Wait for the list to load.
+5. Count the device rows on screen (on web use the browser's find-in-page or the row count; on iOS scroll to the bottom of the first page).
+6. Read the line that says '… devices' above or beside the list.",25 rows are shown; the count line shows the full total (480 on seed data for web; sample size for iOS).,Web + iOS,UI,Yes
+DEV-02,Devices,[DEV-02] Load more fetches the next page,P0,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Devices tab and wait for the list to load.
+3. Press 'Load more' at the bottom of the list once.
+4. Count the rows again and scan for any serial number that appears twice.","50 rows, no duplicates, order preserved; total unchanged.",Web + iOS,API,Yes
+DEV-03,Devices,[DEV-03] Last page hides Load more,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Devices tab and wait for the list to load.
+3. Keep pressing 'Load more' until the list stops growing (about 20 presses on 480 devices).
+4. Compare the number of rows with the total in the '… devices' line.
+5. Look at the bottom of the list for a Load more button.",Row count equals the total; Load more is no longer shown; further loads do nothing.,Web + iOS,UI,Later
+DEV-04,Devices,[DEV-04] iOS auto-loads next page on reaching the end,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data), and use a real iPhone or a simulator where scrolling works.
+2. Launch MockDCOTA on iOS and open the Devices tab.
+3. Scroll slowly down the list to the last row of the first page (25th).
+4. Keep the list still for a moment and watch the list.
+5. Check whether 25 more devices appear without you tapping anything.",Next 25 rows load automatically; no duplicate rows. Note: simulator scrolling problems on your machine may block this test.,iOS,UI,Later
+DEV-05,Devices,[DEV-05] Search by partial serial number,P0,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Devices tab.
+3. Click or tap the search box.
+4. Type C021000 and wait about half a second.
+5. Look at the rows: each serial number should contain that text.
+6. Check the '… devices' line shows the matching count.",Only devices whose serial contains the text are listed; count line matches.,Web + iOS,API,Yes
+DEV-06,Devices,[DEV-06] Search is case-insensitive,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Devices tab and click the search box.
+3. Type demo watch (all lower case) and wait for the list to update. Note the count and the first few rows.
+4. Clear the box, type DEMO WATCH (all capitals) and wait.
+5. Compare the count and rows with the first search.",Identical results for both.,Web + iOS,API,Yes
+DEV-07,Devices,[DEV-07] Search matches store name and model,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Devices tab and click the search box.
+3. Type London and wait. Check every row says 'London Central'.
+4. Clear the box, type Tablet and wait. Check every row's model contains 'Tablet'.",Results contain only devices in London Central / models containing 'Tablet'.,Web + iOS,API,Yes
+DEV-08,Devices,[DEV-08] Search with no matches shows empty state,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Devices tab and click the search box.
+3. Type zzzzzz and wait about half a second.
+4. Look for a 'No devices found' message and for a count of 0.
+5. Check that no red error banner is shown.",No devices found' state; count shows 0 devices; no error banner.,Web + iOS,UI,Yes
+DEV-09,Devices,[DEV-09] Whitespace-only search is ignored,P2,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Devices tab and wait for the full list.
+3. Click the search box and press the space bar three times (no other characters).
+4. Wait half a second and compare the list and count with before.",Behaves like an empty search (full list).,Web + iOS,API,Yes
+DEV-10,Devices,[DEV-10] Status filter works for each status,P0,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Devices tab.
+3. Open the status filter and choose Online. Check every row's badge says Online and note the count.
+4. Repeat for Offline, then Updating, then Failed.
+5. Compare each count with the API: curl ""http://localhost:8080/api/v1/devices?status=online&pageSize=1"" and read 'total' (change the status for each).",Every visible row has the chosen status; count line equals API total for that status.,Web + iOS,API,Yes
+DEV-11,Devices,[DEV-11] Search and status filter combine,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Devices tab.
+3. Set the status filter to Failed.
+4. In the search box type Demo and wait.
+5. Check each row is both Failed and matches 'Demo' (serial, model or store).",Rows satisfy both conditions (AND).,Web + iOS,API,Yes
+DEV-12,Devices,[DEV-12] Changing filter resets to page 1,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Devices tab and press 'Load more' twice (75 rows).
+3. Change the status filter to Offline.
+4. Check the list restarts with at most 25 rows and the Load more button matches the new total.",List restarts from the first page of the new filter; Load more state is correct.,Web + iOS,Component,Yes
+DEV-13,Devices,[DEV-13] Rapid typing shows only the latest result,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Devices tab and click the search box.
+3. Quickly type London, then immediately delete it and type Leeds (all within a second).
+4. Wait two seconds for the list to settle.
+5. Check every row says 'Leeds Central' and none says London.",Final list reflects 'Leeds' only. A slower earlier response must never overwrite it (stale-response race).,Web + iOS,Component,Yes
+DEV-14,Devices,[DEV-14] Device detail shows correct values,P0,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Devices tab.
+3. Note the serial, model and store of the first row.
+4. Click (web) or tap (iOS) that row to open its details.
+5. Compare Serial, Model, OS, Store, Status, Content version and Last check-in with the row and with the API: curl http://localhost:8080/api/v1/devices/<id>.","Serial, model, OS, store, status, content version, last check-in match the row and the API response.",Web + iOS,UI,Yes
+DEV-15,Devices,[DEV-15] Failed device shows no content version,P2,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Devices tab and set the status filter to Failed.
+3. Open any device in the list.
+4. Read the 'Content version' value.",Content version reads 'None'.,Web + iOS,UI,Later
+DEV-16,Devices,[DEV-16] Devices error shows banner and clears list,P1,"All API calls fail (503). Web: POST /__admin/scenario {""mode"":""error""}. iOS: -dcota-scenario error.","1. Set the backend to the error scenario (S-ERR).
+2. Open the app. Web: go to http://localhost:8080 in your browser. iOS: launch MockDCOTA in the simulator.
+3. Open the Devices tab.
+4. Check for a red banner with a Retry button and an empty list.
+5. Switch the backend back to standard, then press Retry.
+6. Check the list loads and the banner disappears.",Error banner with Retry; stale rows are cleared; Retry works after the backend recovers.,Web + iOS,UI,Yes
+DEV-17,Devices,[DEV-17] Empty fleet shows empty state,P2,"Empty data. Web: POST /__admin/scenario {""mode"":""empty""}. iOS: launch with -dcota-scenario empty.","1. Set the backend to the empty scenario (S-EMPTY).
+2. Open the app. Web: go to http://localhost:8080 in your browser. iOS: launch MockDCOTA in the simulator.
+3. Open the Devices tab.
+4. Check for a 'No devices found' message and a count of 0.",No devices found'; count 0.,Web + iOS,UI,Later
+CON-01,Content & deploy,[CON-01] Package list shows all packages,P0,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the app. Web: go to http://localhost:8080 in your browser. iOS: launch MockDCOTA in the simulator.
+3. Open the Content tab.
+4. Count the packages (expect five) and read each one's name, version, size and category.
+5. Check every package has a Deploy button.","5 packages with name, version, size (MB) and category; each has a Deploy button.",Web + iOS,UI,Yes
+CON-02,Content & deploy,[CON-02] Empty content state,P2,"Empty data. Web: POST /__admin/scenario {""mode"":""empty""}. iOS: launch with -dcota-scenario empty.","1. Set the backend to the empty scenario (S-EMPTY).
+2. Open the app. Web: go to http://localhost:8080 in your browser. iOS: launch MockDCOTA in the simulator.
+3. Open the Content tab.
+4. Look for a 'No content packages' message.",No content packages' message.,Web + iOS,UI,Later
+CON-03,Content & deploy,[CON-03] Deploy sheet lists stores with device counts,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the app. Web: go to http://localhost:8080 in your browser. iOS: launch MockDCOTA in the simulator.
+3. Open the Content tab.
+4. Press Deploy next to any package. A Deploy panel opens.
+5. Count the stores listed (expect 12) and read the partner and device count under each.
+6. Check that none is ticked and the summary line says '0 stores · 0 devices'.",12 stores listed with partner and device count; none preselected; count line reads '0 stores · 0 devices'.,Web + iOS,UI,Yes
+CON-04,Content & deploy,[CON-04] Selecting stores updates the summary,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Content tab and press Deploy on any package.
+3. Tap 'London Central' and note its device count.
+4. Tap 'Manchester Central' and note its device count.
+5. Read the summary line: it should say '2 stores' and the two counts added together.
+6. Tap 'London Central' again to untick it and re-read the summary.",Line reads '2 stores · N devices' where N is the sum of those stores' device counts; deselecting reverses it.,Web + iOS,Component,Yes
+CON-05,Content & deploy,[CON-05] Select all / deselect all,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Content tab and press Deploy on any package.
+3. Press 'Select all' and check all 12 stores are ticked.
+4. Press the same button again (it now says 'Deselect all') and check none are ticked.",All 12 selected then none; button label toggles.,Web + iOS,UI,Later
+CON-06,Content & deploy,[CON-06] Feature flag hides Select all,P2,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Web: open http://localhost:8080/?bulkSelect=0. iOS: launch with the argument -dcota-feature-bulk-select NO.
+2. Open the Content tab and press Deploy on any package.
+3. Look for the Select all button (it should be missing).
+4. Tick one store by hand and check the summary line updates.",Select all button is not shown; manual selection still works.,Web + iOS,UI,Later
+CON-07,Content & deploy,[CON-07] Submitting with no stores is rejected,P0,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Content tab and press Deploy on 'Store Safety Notice'.
+3. Do not tick any store.
+4. Press the Deploy button at the top right (iOS) or bottom of the panel (web).
+5. Read the message that appears and check the panel stays open.
+6. Close the panel and open the Deployments tab: no new deployment should be listed.",Message 'Select at least one store.'; sheet stays open; no deployment created (check Deployments).,Web + iOS,API,Yes
+CON-08,Content & deploy,[CON-08] Valid deployment succeeds and opens Deployments,P0,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Content tab and press Deploy on 'Store Safety Notice' (pkg-004).
+3. Tick 'Leeds Central' (store-005).
+4. Press Deploy.
+5. Check the panel closes and the Deployments tab opens.
+6. Find a new row for 'Store Safety Notice' showing 1 store and Leeds Central's device count.",Sheet closes; Deployments tab shows the new row for that package with 1 store and the store's device count.,Web + iOS,UI,Yes
+CON-09,Content & deploy,[CON-09] Conflict: same package already active in store,P0,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Content tab and press Deploy on 'Holiday Demo Loop' (pkg-001).
+3. Tick 'London Central' (store-001), where this package is already being deployed.
+4. Press Deploy.
+5. Read the red message and check the panel stays open.
+6. Open Deployments and check no second Holiday Demo Loop row was added.",Error 'Holiday Demo Loop is already being deployed to one or more selected stores.'; no new deployment.,Web + iOS,API,Yes
+CON-10,Content & deploy,[CON-10] No conflict for different store or different package,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Press Deploy on 'Holiday Demo Loop', tick 'Manchester Central' (store-002) and press Deploy. Check it succeeds.
+3. Go back to Content, press Deploy on 'Trade-In Promo' (pkg-002), tick 'London Central' (store-001) and press Deploy.
+4. Check this one succeeds too.",Both succeed.,Web + iOS,API,Yes
+CON-11,Content & deploy,[CON-11] One conflicting store rejects the whole request,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Press Deploy on 'Holiday Demo Loop'.
+3. Tick 'London Central' (conflicts) and 'Leeds Central' (free).
+4. Press Deploy and read the error.
+5. Open Deployments and check there is no new row for Leeds Central.",Conflict error; store-005 gets nothing (no partial deployment).,Web + iOS,API,Yes
+CON-12,Content & deploy,[CON-12] Upper limit: 10 stores allowed,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Press Deploy on 'Store Safety Notice'.
+3. Tick exactly 10 stores (any ten).
+4. Check the summary says '10 stores'.
+5. Press Deploy and check it is accepted.",Succeeds.,Web + iOS,API,Yes
+CON-13,Content & deploy,[CON-13] Over the limit: 11 stores rejected,P0,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Press Deploy on 'Store Safety Notice'.
+3. Press 'Select all' so all 12 stores are ticked.
+4. Press Deploy.
+5. Read the error message and check the panel stays open.
+6. Open Deployments and check nothing was created.",Error 'A deployment can target at most 10 stores.'; nothing created.,Web + iOS,API,Yes
+CON-14,Content & deploy,[CON-14] Cancel on the sheet creates nothing,P2,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Press Deploy on any package and tick two stores.
+3. Press Cancel.
+4. Check the panel closes and open Deployments: the list should be unchanged.",Sheet closes; Deployments unchanged.,Web + iOS,UI,Later
+CON-15,Content & deploy,[CON-15] Double-submit is prevented,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Press Deploy on 'Store Safety Notice' and tick one store.
+3. Press Deploy twice in quick succession (double-click).
+4. Open Deployments and count the new 'Store Safety Notice' rows: there should be one.",Exactly one deployment created; button disabled while submitting.,Web + iOS,UI,Later
+CON-16,Content & deploy,[CON-16] Package can be redeployed after completion,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Deploy 'Store Safety Notice' to 'Leeds Central' (see CON-08).
+3. Stay on the Deployments tab and wait about 10 seconds until the row shows Completed 100%.
+4. Go to Content, press Deploy on 'Store Safety Notice' again and tick 'Leeds Central'.
+5. Press Deploy and check it is accepted.",Second deployment is accepted (conflict applies only to active ones).,Web + iOS,UI,Later
+DEP-01,Deployments,"[DEP-01] Seeded deployments, order and status",P0,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the app. Web: go to http://localhost:8080 in your browser. iOS: launch MockDCOTA in the simulator.
+3. Open the Deployments tab.
+4. Read the three rows from top to bottom: package name, status badge and progress bar.
+5. Check the order is newest first: 'Holiday Demo Loop' (In Progress, 50%), 'Trade-In Promo' (Completed, 100%), 'Accessories Showcase' (Failed, 30%).","Newest first: dep-001 In Progress 50%, dep-002 Completed 100%, dep-003 Failed 30%.",Web + iOS,UI,Yes
+DEP-02,Deployments,[DEP-02] Progress lifecycle of a new deployment,P0,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Deploy 'Store Safety Notice' to 'Leeds Central' (see CON-08).
+3. Stay on the Deployments tab and watch the new row.
+4. Note the status and progress each time the list refreshes (every 3 seconds).
+5. Check it goes In Progress 40%, then 80%, then Completed 100%.
+6. To see the Scheduled state, create the deployment with: curl -X POST -H 'Content-Type: application/json' -d '{""packageID"":""pkg-004"",""storeIDs"":[""store-005""]}' http://localhost:8080/api/v1/deployments","Progresses 40% → 80% → Completed 100% across polls. The very first fetch already counts as a poll, so 'Scheduled' is usually visible only in the API create response.",Web + iOS,API,Yes
+DEP-03,Deployments,[DEP-03] Cancel button only on active deployments,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Deployments tab.
+3. Look at each of the three rows for a 'Cancel deployment' button.
+4. Check only the In Progress row has one.",Only dep-001 (In Progress) shows Cancel; Completed/Failed do not.,Web + iOS,UI,Yes
+DEP-04,Deployments,[DEP-04] Cancel an active deployment,P0,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Deployments tab.
+3. On the 'Holiday Demo Loop' row (In Progress) press 'Cancel deployment'.
+4. Check the badge changes to Cancelled and the button disappears.
+5. Check the row is still in the list.",Status becomes Cancelled; Cancel button disappears; row stays in list.,Web + iOS,UI,Yes
+DEP-05,Deployments,[DEP-05] Cancelled deployment frees the store,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open Deployments and cancel the 'Holiday Demo Loop' deployment.
+3. Open Content, press Deploy on 'Holiday Demo Loop' and tick 'London Central'.
+4. Press Deploy and check it is accepted this time.",Succeeds (no conflict).,Web + iOS,API,Yes
+DEP-06,Deployments,[DEP-06] Progress stops after cancel,P2,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Deploy 'Store Safety Notice' to 'Leeds Central' (see CON-08).
+3. Straight away press 'Cancel deployment' on the new row.
+4. Wait for two refreshes (about 6 seconds).
+5. Check the status stays Cancelled and the progress bar does not move.",Stays Cancelled; progress does not advance.,Web + iOS,API,Later
+DEP-07,Deployments,[DEP-07] Cancel a deployment that just completed,P2,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Create a deployment with the curl command in DEP-02.
+3. Refresh the deployment list through the API twice (curl http://localhost:8080/api/v1/deployments) until it is Completed.
+4. Try to cancel it: curl -X POST http://localhost:8080/api/v1/deployments/<id>/cancel.
+5. Read the response.",Clear error 'Only scheduled or in-progress deployments can be cancelled.'; row shows the real status.,Web + iOS,API,Later
+DEP-08,Deployments,[DEP-08] Deployments polling survives an error,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Deployments tab.
+3. In a terminal run: curl -X POST -H 'Content-Type: application/json' -d '{""count"":1,""status"":503}' http://localhost:8080/__admin/fail-next
+4. Wait for the next refresh (within 3 seconds) and check a red banner appears while the rows stay.
+5. Wait for the following refresh and check the banner disappears.",Banner appears; previous rows stay; next poll succeeds and banner clears.,Web + iOS,API,Later
+DEP-09,Deployments,[DEP-09] Empty state,P2,"Empty data. Web: POST /__admin/scenario {""mode"":""empty""}. iOS: launch with -dcota-scenario empty.","1. Set the backend to the empty scenario (S-EMPTY).
+2. Open the app. Web: go to http://localhost:8080 in your browser. iOS: launch MockDCOTA in the simulator.
+3. Open the Deployments tab.
+4. Look for the 'No deployments yet' message.",No deployments yet'.,Web + iOS,UI,Later
+DEP-10,Deployments,[DEP-10] Polling stops when leaving the tab,P2,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data) (web only).
+2. Open http://localhost:8080 and open the browser's developer tools on the Network tab.
+3. Open the Deployments tab and check that /deployments requests repeat every 3 seconds.
+4. Switch to the Devices tab.
+5. Watch for 10 seconds and check no more /deployments requests are sent.",No further /deployments requests after leaving the tab.,Web,Manual,Manual
+API-01,API & contract,[API-01] Unknown device returns 404,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. In a terminal run: curl -i http://localhost:8080/api/v1/devices/dev-99999
+3. Check the status line is 404.
+4. Check the JSON body has code NOT_FOUND and a message.","404 with body {code:'NOT_FOUND', message}.",API,API,Yes
+API-02,API & contract,[API-02] Invalid paging parameters,P0,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Run each command and check each returns 400 with code VALIDATION_ERROR:
+3. curl -i ""http://localhost:8080/api/v1/devices?page=0""
+4. curl -i ""http://localhost:8080/api/v1/devices?pageSize=0""
+5. curl -i ""http://localhost:8080/api/v1/devices?pageSize=101""
+6. curl -i ""http://localhost:8080/api/v1/devices?pageSize=abc""",Each returns 400 VALIDATION_ERROR with a message.,API,API,Yes
+API-03,API & contract,[API-03] Invalid status filter,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Run: curl -i ""http://localhost:8080/api/v1/devices?status=broken""
+3. Check the response is 400 with code VALIDATION_ERROR.",400 VALIDATION_ERROR.,API,API,Yes
+API-04,API & contract,[API-04] Page boundaries,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Run: curl ""http://localhost:8080/api/v1/devices?pageSize=100&page=5"" and count the items (expect 80).
+3. Run: curl ""http://localhost:8080/api/v1/devices?pageSize=100&page=6"" and check items is empty.
+4. Check 'total' is 480 in both.",Page 5 has 80 items; page 6 returns 0 items with total unchanged.,API,API,Yes
+API-05,API & contract,[API-05] Create deployment: malformed or missing body,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Run: curl -i -X POST -H 'Content-Type: application/json' -d '{bad json' http://localhost:8080/api/v1/deployments
+3. Run the same with no -d option.
+4. Run it with -d '{""packageID"":""pkg-004""}' (storeIDs missing).
+5. Check all three return 400 VALIDATION_ERROR.",400 VALIDATION_ERROR each time.,API,API,Yes
+API-06,API & contract,[API-06] Create deployment: unknown package / unknown store,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Run: curl -i -X POST -H 'Content-Type: application/json' -d '{""packageID"":""pkg-999"",""storeIDs"":[""store-001""]}' http://localhost:8080/api/v1/deployments  (expect 404 NOT_FOUND).
+3. Run: curl -i -X POST -H 'Content-Type: application/json' -d '{""packageID"":""pkg-004"",""storeIDs"":[""store-999""]}' http://localhost:8080/api/v1/deployments  (expect 400 VALIDATION_ERROR).",404 NOT_FOUND for package; 400 for unknown store.,API,API,Yes
+API-07,API & contract,[API-07] Duplicate store IDs are de-duplicated,P2,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Run: curl -X POST -H 'Content-Type: application/json' -d '{""packageID"":""pkg-004"",""storeIDs"":[""store-005"",""store-005""]}' http://localhost:8080/api/v1/deployments
+3. Check the status is 201.
+4. Check storeIDs in the response has one entry and deviceCount equals one store's devices.",201; storeIDs contains one entry; deviceCount counted once.,API,API,Yes
+API-08,API & contract,[API-08] Cancel errors,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Run: curl -i -X POST http://localhost:8080/api/v1/deployments/dep-002/cancel  (completed; expect 409 CONFLICT).
+3. Run: curl -i -X POST http://localhost:8080/api/v1/deployments/dep-999/cancel  (unknown; expect 404 NOT_FOUND).",409 CONFLICT and 404 NOT_FOUND respectively.,API,API,Yes
+API-09,API & contract,[API-09] Responses match openapi.yaml,P0,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Run a contract-testing tool against the server, for example: pip install schemathesis, then schemathesis run mock-server/openapi.yaml --base-url=http://localhost:8080
+3. Review the report for any schema violations or server errors.","No schema violations, including error responses.",API,Contract,Yes
+API-10,API & contract,[API-10] Dates are ISO-8601 UTC without fractional seconds,P0,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Run: curl http://localhost:8080/api/v1/devices/dev-00001 and read lastCheckIn.
+3. Run: curl http://localhost:8080/api/v1/deployments and read createdAt.
+4. Check each looks like 2025-10-09T08:53:20Z: ends with Z, no digits after the seconds.",Format like 2025-10-09T08:53:20Z. The iOS decoder fails on other formats.,API,Contract,Yes
+API-11,API & contract,[API-11] Unknown route returns JSON 404,P2,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Run: curl -i http://localhost:8080/api/v1/nope
+3. Check the status is 404 and the body is JSON with code NOT_FOUND (not an HTML page).",404 {code:'NOT_FOUND'}; not an HTML page.,API,API,Yes
+API-12,API & contract,[API-12] Injected failure: one 503 then recovery,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Run: curl -X POST -H 'Content-Type: application/json' -d '{""count"":1,""status"":503}' http://localhost:8080/__admin/fail-next
+3. Run: curl -i http://localhost:8080/api/v1/stores  (expect 503).
+4. Run the same call again (expect 200).",First call 503; second call succeeds.,API,API,Yes
+API-13,API & contract,[API-13] Admin reset restores seed data,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Create a deployment with the curl command in DEP-02 and note its id (dep-101).
+3. Run: curl -X POST http://localhost:8080/__admin/reset
+4. Run: curl http://localhost:8080/api/v1/deployments and check only dep-001, dep-002 and dep-003 exist.
+5. Create a deployment again and check its id is dep-101.",Only dep-001..003 remain; next created id restarts at dep-101.,API,API,Yes
+API-14,API & contract,[API-14] Concurrent deploys of the same package and store,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. In two terminals prepare the same command: curl -s -o /dev/null -w '%{http_code}\n' -X POST -H 'Content-Type: application/json' -d '{""packageID"":""pkg-004"",""storeIDs"":[""store-005""]}' http://localhost:8080/api/v1/deployments
+3. Run both at the same moment (or use a script that runs them in parallel).
+4. Check one returns 201 and the other 409.",Exactly one 201 and one 409.,API,API,Later
+XPL-01,Cross-cutting,"[XPL-01] Parity: same rules, same messages on web and iOS",P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. On web, run CON-07, CON-09, CON-13 and DEP-04.
+3. On iOS, run the same four cases.
+4. Compare the error text and the outcome on each platform side by side.",Error text and outcomes are identical.,Web + iOS,Contract,Yes
+XPL-02,Cross-cutting,[XPL-02] Backend unreachable,P0,Server stopped,"1. Start the app, then stop the mock server (press Ctrl-C in its terminal). For iOS also launch with -dcota-backend remote.
+2. Click through the Dashboard, Devices and Deployments tabs.
+3. Check each shows a clear error banner with Retry and does not crash or spin forever.
+4. Restart the server and press Retry; check the data loads.",Clear 'Network error' style banner with Retry; no crash or endless spinner.,Web + iOS,UI,Later
+XPL-03,Cross-cutting,[XPL-03] Hostile text in search is not executed,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data) (web).
+2. Open the Devices tab and click the search box.
+3. Paste this text and wait: <img src=x onerror=alert(1)>
+4. Check no pop-up appears and the page layout is unchanged.
+5. Check the result is simply 'No devices found'.",Text is treated as a plain query; no alert; no layout break.,Web,UI,Later
+XPL-04,Cross-cutting,[XPL-04] Layout on small and large screens,P2,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Web: open the app and resize the browser to 375 px wide, then to 1440 px wide (use the developer tools device toolbar).
+3. iOS: run on a small phone (iPhone SE) and a large one (Pro Max), in portrait and landscape.
+4. Visit all four tabs and open the Deploy panel in each size.
+5. Look for clipped, overlapping or unreachable content.",No clipped or overlapping content; tables/lists usable.,Web + iOS,Manual,Manual
+XPL-05,Cross-cutting,[XPL-05] Dark mode and larger text,P2,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Turn on dark mode (web: the operating system setting; iOS: Settings → Display).
+3. iOS: also set a large text size under Settings → Accessibility → Display & Text Size → Larger Text.
+4. Visit all four tabs.
+5. Check text is readable and the status badges are still easy to tell apart.","Text readable, nothing truncated beyond reason, status colours still distinguishable.",Web + iOS,Manual,Manual
+XPL-06,Cross-cutting,[XPL-06] Accessibility basics,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Web: use only the keyboard (Tab, Shift-Tab, Enter, Space) to search for a device and open the Deploy panel.
+3. iOS: turn on VoiceOver and swipe through the Devices tab and the Deploy panel.
+4. Check every control is reachable and has a clear name.
+5. Check a ticked store is announced as selected and that status is shown by text, not only by colour.",Every control reachable and labelled; selected store announced as selected; status not conveyed by colour alone.,Web + iOS,Manual,Manual
+XPL-07,Cross-cutting,[XPL-07] iOS onboarding appears once,P2,Fresh install,"1. Delete the app from the simulator (or erase the simulator) so it is a fresh install.
+2. Launch MockDCOTA without the -dcota-skip-onboarding argument.
+3. Check the Welcome sheet appears and cannot be swiped away.
+4. Press 'Get Started'.
+5. Quit and relaunch the app; check the Welcome sheet does not appear again.",Welcome sheet shown on first launch only; it can't be swiped away.,iOS,UI,Later
+XPL-08,Cross-cutting,[XPL-08] iOS launch arguments take effect,P1,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data) (iOS).
+2. In Xcode choose Product → Scheme → Edit Scheme → Run → Arguments.
+3. Add -dcota-scenario empty, run, and check empty states appear. Repeat with error and slow.
+4. Add -dcota-no-progress YES, create a deployment, and check its progress does not advance.","App shows the matching state; with no-progress, deployments stay at their initial progress.",iOS,UI,Yes
+XPL-09,Cross-cutting,[XPL-09] Responsiveness with a large list,P2,"Standard seed data, fresh state. Web: POST /__admin/reset then reload. iOS: relaunch with -dcota-skip-onboarding YES.","1. Prepare the data as described in the Setup column (S-STD = reset to standard data).
+2. Open the Devices tab and load all 480 devices (keep pressing Load more).
+3. Scroll up and down the list quickly.
+4. Type a search term and time how long the results take to appear.
+5. Check scrolling is smooth and results appear in about a second.",Interaction stays smooth; search results appear within about 1 second.,Web + iOS,Manual,Manual
