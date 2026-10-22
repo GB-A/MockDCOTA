@@ -1,0 +1,32 @@
+name: Build app
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build for iOS Simulator
+        run: |
+          xcodebuild build \
+            -project MockDCOTA.xcodeproj \
+            -scheme MockDCOTA \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO
+
+  mock-server-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Start server and hit /health
+        run: |
+          node mock-server/server.js &
+          sleep 1
+          curl --fail http://localhost:8080/health

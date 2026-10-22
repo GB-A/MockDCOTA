@@ -1,0 +1,546 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 70;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0B61F89F5F7642D309B9FE39 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96F1EF36D933DC535A0943 /* RootView.swift */; };
+		0CDA3B6199100A9642BA5C42 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B6916139746F883A6768B8 /* ContentView.swift */; };
+		42E6F2BC48F745FEA57A6866 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD3D094489041084EF1BFA2 /* AppConfig.swift */; };
+		499B5734F73195CBFE380616 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D2F45C92BC39F7ED3A4C71 /* Components.swift */; };
+		525893DEBC47F74D14EE08BB /* DeploymentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BEBB0D7D82784414BD4694 /* DeploymentsView.swift */; };
+		59AA01B8F4BF6EAE11D6EFEE /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9B82FA47E78C212B2C5CB4 /* DashboardView.swift */; };
+		74C0278F7E55440699FF06E0 /* MockDCOTAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BE0E58CC11D8A5F61EDD0D /* MockDCOTAApp.swift */; };
+		89AE0911973C318ABBC87C09 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E42ACC1084181704785DBC /* Models.swift */; };
+		90E1CB5089DB098DC19AB774 /* InMemoryDCOTAService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F81D4EAC749ABB05B6FC16 /* InMemoryDCOTAService.swift */; };
+		A9D727707E0EED6D3CB8CCCF /* ViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CB3EDA0C90B4081A228033 /* ViewModels.swift */; };
+		A9DA2DCD272349154B512E2F /* DCOTAError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9593F4ADA62A19736F844A5 /* DCOTAError.swift */; };
+		AED267F854F02986A4C1376E /* DevicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D52E644CC6413E74FD59F2 /* DevicesView.swift */; };
+		B3C183939307CC65A733912F /* AccessibilityID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07BABC0A76DFCACA3177E52 /* AccessibilityID.swift */; };
+		BDCA32B2A1CCA9F9E68928FF /* RemoteDCOTAService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A767A0D2B1574DB8F31207 /* RemoteDCOTAService.swift */; };
+		C05372E5F1284CB4E4C61F3C /* DCOTAService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890032A526F9C6E05656F754 /* DCOTAService.swift */; };
+		C30C51022B2229B25FD62DAF /* SeedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF56924324C85677D1F23177 /* SeedData.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A4991AC5308A93A4006B8EC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 46F86FAA6BBF9AC94A7E4595 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 42AEFBAE01D2DFD981F7DA7D;
+			remoteInfo = MockDCOTA;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		02A767A0D2B1574DB8F31207 /* RemoteDCOTAService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDCOTAService.swift; sourceTree = "<group>"; };
+		39336BD3A0262B77EFBBEFA1 /* MockDCOTA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MockDCOTA.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		42CB3EDA0C90B4081A228033 /* ViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModels.swift; sourceTree = "<group>"; };
+		48F81D4EAC749ABB05B6FC16 /* InMemoryDCOTAService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryDCOTAService.swift; sourceTree = "<group>"; };
+		53047F964707233DB7A386D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		61D52E644CC6413E74FD59F2 /* DevicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesView.swift; sourceTree = "<group>"; };
+		6E96F1EF36D933DC535A0943 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		76BE0E58CC11D8A5F61EDD0D /* MockDCOTAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDCOTAApp.swift; sourceTree = "<group>"; };
+		890032A526F9C6E05656F754 /* DCOTAService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCOTAService.swift; sourceTree = "<group>"; };
+		92B6916139746F883A6768B8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A4991ABF308A93A4006B8EC0 /* MockDCOTAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MockDCOTAUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9D2F45C92BC39F7ED3A4C71 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		AC9B82FA47E78C212B2C5CB4 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		AF56924324C85677D1F23177 /* SeedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedData.swift; sourceTree = "<group>"; };
+		D07BABC0A76DFCACA3177E52 /* AccessibilityID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityID.swift; sourceTree = "<group>"; };
+		D3E42ACC1084181704785DBC /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		DFD3D094489041084EF1BFA2 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		E9593F4ADA62A19736F844A5 /* DCOTAError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCOTAError.swift; sourceTree = "<group>"; };
+		F1BEBB0D7D82784414BD4694 /* DeploymentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeploymentsView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A4991AC0308A93A4006B8EC0 /* MockDCOTAUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = MockDCOTAUITests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A4991ABC308A93A4006B8EC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAF6AA633395B1B76148E35B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0A2C978E52A76F0AA9F68BB5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				39336BD3A0262B77EFBBEFA1 /* MockDCOTA.app */,
+				A4991ABF308A93A4006B8EC0 /* MockDCOTAUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		155AC2EB410B7777FB844E10 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				D07BABC0A76DFCACA3177E52 /* AccessibilityID.swift */,
+				DFD3D094489041084EF1BFA2 /* AppConfig.swift */,
+				53047F964707233DB7A386D6 /* Info.plist */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		2B731CEFC6751AAE0EC69B98 = {
+			isa = PBXGroup;
+			children = (
+				F65917308E46792F66DE3FDD /* App */,
+				3E797641C59AA877D7300E59 /* Models */,
+				8755A5CDC8EA5E5E794039A9 /* Services */,
+				400D7056AB27AAD92E9C54AF /* ViewModels */,
+				820EF62CADFCC56B9389F6FE /* Views */,
+				155AC2EB410B7777FB844E10 /* Support */,
+				A4991AC0308A93A4006B8EC0 /* MockDCOTAUITests */,
+				0A2C978E52A76F0AA9F68BB5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3E797641C59AA877D7300E59 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E9593F4ADA62A19736F844A5 /* DCOTAError.swift */,
+				D3E42ACC1084181704785DBC /* Models.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		400D7056AB27AAD92E9C54AF /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				42CB3EDA0C90B4081A228033 /* ViewModels.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		820EF62CADFCC56B9389F6FE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A9D2F45C92BC39F7ED3A4C71 /* Components.swift */,
+				92B6916139746F883A6768B8 /* ContentView.swift */,
+				AC9B82FA47E78C212B2C5CB4 /* DashboardView.swift */,
+				F1BEBB0D7D82784414BD4694 /* DeploymentsView.swift */,
+				61D52E644CC6413E74FD59F2 /* DevicesView.swift */,
+				6E96F1EF36D933DC535A0943 /* RootView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8755A5CDC8EA5E5E794039A9 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				890032A526F9C6E05656F754 /* DCOTAService.swift */,
+				48F81D4EAC749ABB05B6FC16 /* InMemoryDCOTAService.swift */,
+				02A767A0D2B1574DB8F31207 /* RemoteDCOTAService.swift */,
+				AF56924324C85677D1F23177 /* SeedData.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		F65917308E46792F66DE3FDD /* App */ = {
+			isa = PBXGroup;
+			children = (
+				76BE0E58CC11D8A5F61EDD0D /* MockDCOTAApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		42AEFBAE01D2DFD981F7DA7D /* MockDCOTA */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7BE8973CC64B05C5BC87E970 /* Build configuration list for PBXNativeTarget "MockDCOTA" */;
+			buildPhases = (
+				FCA229C23F166EBB0BA5029E /* Sources */,
+				DAF6AA633395B1B76148E35B /* Frameworks */,
+				943E4BBD9B51C81965501BA3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MockDCOTA;
+			productName = MockDCOTA;
+			productReference = 39336BD3A0262B77EFBBEFA1 /* MockDCOTA.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A4991ABE308A93A4006B8EC0 /* MockDCOTAUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A4991AC7308A93A4006B8EC0 /* Build configuration list for PBXNativeTarget "MockDCOTAUITests" */;
+			buildPhases = (
+				A4991ABB308A93A4006B8EC0 /* Sources */,
+				A4991ABC308A93A4006B8EC0 /* Frameworks */,
+				A4991ABD308A93A4006B8EC0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A4991AC6308A93A4006B8EC0 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A4991AC0308A93A4006B8EC0 /* MockDCOTAUITests */,
+			);
+			name = MockDCOTAUITests;
+			packageProductDependencies = (
+			);
+			productName = MockDCOTAUITests;
+			productReference = A4991ABF308A93A4006B8EC0 /* MockDCOTAUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		46F86FAA6BBF9AC94A7E4595 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2660;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					A4991ABE308A93A4006B8EC0 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = 42AEFBAE01D2DFD981F7DA7D;
+					};
+				};
+			};
+			buildConfigurationList = 200AD4F23452D049FE3D290D /* Build configuration list for PBXProject "MockDCOTA" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2B731CEFC6751AAE0EC69B98;
+			productRefGroup = 0A2C978E52A76F0AA9F68BB5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				42AEFBAE01D2DFD981F7DA7D /* MockDCOTA */,
+				A4991ABE308A93A4006B8EC0 /* MockDCOTAUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		943E4BBD9B51C81965501BA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4991ABD308A93A4006B8EC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A4991ABB308A93A4006B8EC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCA229C23F166EBB0BA5029E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74C0278F7E55440699FF06E0 /* MockDCOTAApp.swift in Sources */,
+				A9DA2DCD272349154B512E2F /* DCOTAError.swift in Sources */,
+				89AE0911973C318ABBC87C09 /* Models.swift in Sources */,
+				C05372E5F1284CB4E4C61F3C /* DCOTAService.swift in Sources */,
+				90E1CB5089DB098DC19AB774 /* InMemoryDCOTAService.swift in Sources */,
+				BDCA32B2A1CCA9F9E68928FF /* RemoteDCOTAService.swift in Sources */,
+				C30C51022B2229B25FD62DAF /* SeedData.swift in Sources */,
+				A9D727707E0EED6D3CB8CCCF /* ViewModels.swift in Sources */,
+				499B5734F73195CBFE380616 /* Components.swift in Sources */,
+				0CDA3B6199100A9642BA5C42 /* ContentView.swift in Sources */,
+				59AA01B8F4BF6EAE11D6EFEE /* DashboardView.swift in Sources */,
+				525893DEBC47F74D14EE08BB /* DeploymentsView.swift in Sources */,
+				AED267F854F02986A4C1376E /* DevicesView.swift in Sources */,
+				0B61F89F5F7642D309B9FE39 /* RootView.swift in Sources */,
+				B3C183939307CC65A733912F /* AccessibilityID.swift in Sources */,
+				42E6F2BC48F745FEA57A6866 /* AppConfig.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A4991AC6308A93A4006B8EC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 42AEFBAE01D2DFD981F7DA7D /* MockDCOTA */;
+			targetProxy = A4991AC5308A93A4006B8EC0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		22F75101C717335ACF4089A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Support/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MockDCOTA;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.mockdcota.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2D53B50AE2273FABAAF8B8FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A4991AC8308A93A4006B8EC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = sample.MockDCOTAUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MockDCOTA;
+			};
+			name = Debug;
+		};
+		A4991AC9308A93A4006B8EC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = sample.MockDCOTAUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MockDCOTA;
+			};
+			name = Release;
+		};
+		D4B2141B77146EF47E948847 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FA7C752E798F561D7D156D98 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Support/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MockDCOTA;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.mockdcota.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		200AD4F23452D049FE3D290D /* Build configuration list for PBXProject "MockDCOTA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2D53B50AE2273FABAAF8B8FA /* Debug */,
+				D4B2141B77146EF47E948847 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7BE8973CC64B05C5BC87E970 /* Build configuration list for PBXNativeTarget "MockDCOTA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA7C752E798F561D7D156D98 /* Debug */,
+				22F75101C717335ACF4089A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A4991AC7308A93A4006B8EC0 /* Build configuration list for PBXNativeTarget "MockDCOTAUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4991AC8308A93A4006B8EC0 /* Debug */,
+				A4991AC9308A93A4006B8EC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 46F86FAA6BBF9AC94A7E4595 /* Project object */;
+}

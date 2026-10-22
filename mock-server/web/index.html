@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MockDCOTA Console</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <h1>MockDCOTA</h1>
+    <nav>
+      <button data-tab="dashboard" data-testid="tab.dashboard">Dashboard</button>
+      <button data-tab="devices" data-testid="tab.devices">Devices</button>
+      <button data-tab="content" data-testid="tab.content">Content</button>
+      <button data-tab="deployments" data-testid="tab.deployments">Deployments</button>
+    </nav>
+  </header>
+  <main>
+    <div id="error" class="banner" hidden>
+      <span data-testid="common.error" id="error-text"></span>
+      <button id="retry" data-testid="common.retry">Retry</button>
+    </div>
+    <div id="loading" data-testid="common.loading" hidden>Loading…</div>
+    <div id="empty" data-testid="common.empty" hidden></div>
+
+    <section id="dashboard" data-testid="dashboard.screen" hidden>
+      <div class="tiles" id="tiles"></div>
+      <p id="online-pct" data-testid="dashboard.onlinePercentage" class="muted"></p>
+    </section>
+
+    <section id="devices" data-testid="devices.screen" hidden>
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Serial, model or store" data-testid="devices.search" aria-label="Search devices">
+        <select id="status" data-testid="devices.statusFilter" aria-label="Status filter">
+          <option value="">All</option>
+          <option value="online">Online</option><option value="offline">Offline</option>
+          <option value="updating">Updating</option><option value="failed">Failed</option>
+        </select>
+        <span id="result-count" data-testid="devices.resultCount" class="muted"></span>
+      </div>
+      <table>
+        <thead><tr><th>Serial</th><th>Model</th><th>Store</th><th>Status</th></tr></thead>
+        <tbody id="device-rows" data-testid="devices.list"></tbody>
+      </table>
+      <button id="load-more" data-testid="devices.loadMore" hidden>Load more</button>
+    </section>
+
+    <section id="content" data-testid="content.screen" hidden>
+      <ul id="package-list" data-testid="content.list" class="cards"></ul>
+    </section>
+
+    <section id="deployments" data-testid="deployments.screen" hidden>
+      <ul id="deployment-list" data-testid="deployments.list" class="cards"></ul>
+    </section>
+  </main>
+
+  <dialog id="device-dialog" data-testid="deviceDetail.screen">
+    <h2>Device</h2>
+    <dl id="device-detail"></dl>
+    <button id="device-close">Close</button>
+  </dialog>
+
+  <dialog id="deploy-dialog" data-testid="deploySheet.screen">
+    <h2 id="deploy-title">Deploy</h2>
+    <button id="select-all" data-testid="deploySheet.selectAll"></button>
+    <ul id="store-list" class="stores"></ul>
+    <p id="selection-count" data-testid="deploySheet.selectionCount" class="muted"></p>
+    <p id="deploy-error" data-testid="deploySheet.error" class="err" hidden></p>
+    <div class="row">
+      <button id="deploy-cancel" data-testid="deploySheet.cancel">Cancel</button>
+      <button id="deploy-submit" data-testid="deploySheet.submit" class="primary">Deploy</button>
+    </div>
+  </dialog>
+
+  <script src="/app.js"></script>
+</body>
+</html>
