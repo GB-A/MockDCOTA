@@ -4,7 +4,18 @@
 
 MockDCOTA is a compact iOS and web application simulating digital content management for a partner-store device fleet. This repository emphasizes testability and cross-platform UI quality through Playwright and XCUITest page-object suites.
 
-## Application screens
+## 📑 Contents
+
+- [🖥️ Application screens](#application-screens)
+- [📊 Test status](#test-status)
+- [🧪 Implemented UI test cases](#implemented-ui-test-cases)
+- [▶️ Run Playwright](#run-playwright)
+- [📱 Run XCUITest](#run-xcuitest)
+- [⚙️ Testability and CI](#testability-and-ci)
+- [🤖 AI-assisted test engineering](#ai-assisted-test-engineering)
+- [🗂️ Project map](#project-map)
+
+## 🖥️ Application screens
 
 | Fleet dashboard | Devices |
 |---|---|
@@ -14,14 +25,14 @@ MockDCOTA is a compact iOS and web application simulating digital content manage
 |---|---|
 | ![MockDCOTA content packages](docs/screenshots/content.png) | ![MockDCOTA deployments](docs/screenshots/deployments.png) |
 
-## Test status
+## 📊 Test status
 
 **Latest local Playwright run:** ✅ **48 passed · 0 failed**  
 **Run date:** 2026-10-22 · **Browsers:** Chromium, Firefox, WebKit · **Scenarios:** 16
 
 The count represents 16 Playwright scenarios executed in each of three browser projects. The GitHub Actions badge above reports the latest remote workflow status after the workflow has run. XCUITest is included in the repository but was not part of this Playwright run.
 
-## Implemented UI test cases
+## 🧪 Implemented UI test cases
 
 | Area | Test cases |
 |---|---|
@@ -32,7 +43,7 @@ The count represents 16 Playwright scenarios executed in each of three browser p
 
 The broader scenario inventory is tracked in [MockDCOTA_Testcases.csv](MockDCOTA_Testcases.csv). Both UI suites use page objects. The web `data-testid` values mirror the iOS accessibility identifiers in `Support/AccessibilityID.swift`, keeping selectors stable and vocabulary consistent across platforms.
 
-## Run Playwright
+## ▶️ Run Playwright
 
 Requirements: Node.js 20 or later.
 
@@ -51,7 +62,7 @@ npx playwright test tests/devices.spec.ts
 npx playwright test tests/deployments.spec.ts
 ```
 
-## Run XCUITest
+## 📱 Run XCUITest
 
 Requirements: Xcode and an available iOS Simulator.
 
@@ -64,7 +75,7 @@ xcodebuild test \
 
 The UI test target skips onboarding and uses the in-memory backend. Find available simulators with `xcrun simctl list devices available`.
 
-## Testability and CI
+## ⚙️ Testability and CI
 
 - The app and web console cover a fleet dashboard, device search, content packages, and deployments.
 - The mock API provides deterministic seed data, reset and empty/error/slow scenario hooks, and injected failures.
@@ -80,11 +91,11 @@ node mock-server/server.js
 
 The API contract is documented in [mock-server/openapi.yaml](mock-server/openapi.yaml).
 
-## AI-assisted test engineering
+## 🤖 AI-assisted test engineering
 
 GitHub Copilot assisted with app/test setup and Playwright page-object and scenario scaffolding. It helped inspect app flows, selectors, and backend hooks; configure repeatable server startup and CI; and turn acceptance scenarios into measurable assertions. Generated changes were reviewed against the source and validated by running the browser tests. AI assistance complemented, rather than replaced, test execution and engineering review.
 
-## Project map
+## 🗂️ Project map
 
 - `MockDCOTAUITests/` — Swift UI tests and iOS page object
 - `mock-server/tests/` — Playwright specs and web page objects
